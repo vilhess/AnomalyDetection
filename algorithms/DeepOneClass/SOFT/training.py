@@ -19,8 +19,8 @@ def training(anomaly_digits):
     NORMAL_DIGITS.remove(ANOMALY_DIGITS)
 
     BATCH_SIZE=128
-    LEARNING_RATE=3e-4
-    EPOCHS=150
+    LEARNING_RATE=1e-4
+    EPOCHS=50
 
     train_dic_dataset, val_dic_dataset, _ = load_datasets()
     trainloader = prepare_data_loaders(train_dic_dataset, val_dic_dataset, NORMAL_DIGITS, BATCH_SIZE)
@@ -41,7 +41,7 @@ def training(anomaly_digits):
 
     model.train()
 
-    optimizer = optim.Adam(model.parameters(), lr=1e-4, weight_decay=1e-6)
+    optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE, weight_decay=1e-6)
     scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[50], gamma=0.1)
     nu=0.1
     R=0
